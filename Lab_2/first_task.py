@@ -16,33 +16,40 @@ def Newton_polynomial(x, f, x_arr):
         y += f[i]*tmp
     return y
 
-# t_x = [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
-# x   = [1, 0.8, 0.5, 0.307, 0.2, 0.137, 0.1, 0.075, 0.06, 0.047, 0.039]
+def draw_plt(plt_num, plt_title, x_arr, y_arr, plt_color = "blue"):
+    plt.figure(plt_num)
+    plt.grid(True)
+    plt.title(plt_title)
+    plt.plot(x_arr, y_arr, plt_color)
 
-# t_y = [-0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0]
-# y   = [0.02, 0.079, 0.175, 0.303, 0.459, 0.638, 0.831, 1.03, 1.23, 1.42]
+t_x = np.array([0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1])
+x   = np.array([1, 0.8, 0.5, 0.307, 0.2, 0.137, 0.1, 0.075, 0.06, 0.047, 0.039])
 
-test_x = np.array([0.0, 1.0, 2.0, 3.0])
-test_y = np.array([-2.0, -5.0, 0.0, -4.0])
-f_coef = Newton_polynomial_coef(test_x, test_y)
+f_coef_x = Newton_polynomial_coef(t_x, x)
+P_x = []
+P_t = np.arange(0, 1, 0.01)
+for t in P_t:
+    P_x.append(Newton_polynomial(t, f_coef_x, t_x))
 
-P = []
-P_x = np.arange(0, 3, 0.1)
-for x in P_x:
-    P.append(Newton_polynomial(x, f_coef, test_x))
+draw_plt(1, "График x(t)", t_x, x)
+draw_plt(1, "График P(t)", P_t, P_x, "red")
 
-plt.grid(True)
-plt.title("График test")
-plt.plot(test_x, test_y)
-plt.plot(P_x, P, "red")
+
+t_y = np.array([-0.8, -0.6, -0.4, -0.2, 0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
+y   = np.array([0.02, 0.079, 0.175, 0.303, 0.459, 0.638, 0.831, 1.03, 1.23, 1.42])
+
+f_coef_y = Newton_polynomial_coef(t_y, y)
+M_y = []
+M_t = np.arange(-0.8, 1, 0.01)
+for t in M_t:
+    M_y.append(Newton_polynomial(t, f_coef_y, t_y))
+
+draw_plt(2, "График y(t)", t_y, y)
+draw_plt(2, "График M(t)", M_t, M_y, "red")
+
+y_x = []
+for t in P_x:
+    y_x.append(Newton_polynomial(t, f_coef_y, t_y))
+draw_plt(3, "График y(x)", P_x, y_x)
+
 plt.show()
-
-# plt.grid(True)
-# plt.title("График x(t)")
-# plt.plot(t_x, x)
-# plt.show()
-
-# plt.grid(True)
-# plt.title("График y(t)")
-# plt.plot(t_y, y)
-# plt.show()
