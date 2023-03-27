@@ -1,4 +1,3 @@
-
 import numpy as np
 import matplotlib.pyplot as plt
 from sympy import *
@@ -13,11 +12,11 @@ m, L, vx_0 = 2, 4, 4
 begin = np.array([0, L, vx_0, 0, m/L*(vx_0**2) + m*9.82])
 var('x, y, vx, vy, T, t') 
 g  =  9.81 + 0.01 * cos(2 * pi * t)
-g_t = -0.01 * sin(2* pi *t) * 2 * pi
-vx_t = -x/m/L*T
-vy_t = -y/m/L*T + g
-T_t = 2* m/L * (vx * vx_t + vy*vy_t) + m*g_t*y/L + m*g*vy/L
-f =  Array([vx, vy, vx_t, vy_t, T_t])
+dg = -0.01 * sin(2* pi *t) * 2 * pi
+dvx = -x/m/L*T
+dvy = -y/m/L*T + g
+dT = 2* m/L * (vx * dvx + vy*dvy) + m*dg*y/L + m*g*vy/L
+f =  Array([vx, vy, dvx, dvy, dT])
 func = lambdify((t,[x,y,vx,vy, T]), f, 'numpy')
 
 
