@@ -3,8 +3,9 @@ import matplotlib.pyplot as plt
 from sympy import *
 from methods import *
 
-step = 0.001
-numOfIter = 10000
+numOfIter = 30000
+beg_t, end_t = 0, 4
+step = (end_t - beg_t)/numOfIter
 
 m, L, vx_0 = 2, 4, 4
 
@@ -17,15 +18,15 @@ dvx = -x/m/L*T
 dvy = -y/m/L*T + g
 dT = 2* m/L * (vx * dvx + vy*dvy) + m*dg*y/L + m*g*vy/L
 f =  Array([vx, vy, dvx, dvy, dT])
-func = lambdify((t,[x,y,vx,vy, T]), f, 'numpy')
+func = lambdify((t, [x, y, vx, vy, T]), f, 'numpy')
 
 
 fl = input()
 if fl == "R":
-    points = Runge_Kutta4(func, 0, begin, numOfIter, step)
+    points = Runge_Kutta4(func, beg_t, begin, numOfIter, step)
 elif fl == "A":
-    beginAddams = Runge_Kutta4(func, 0, begin, 3, step)
-    points = Addams4(func, 0, beginAddams, numOfIter, step)
+    beginAddams = Runge_Kutta4(func, beg_t, begin, 3, step)
+    points = Addams4(func, beg_t, beginAddams, numOfIter, step)
 else: 
     print("Wrong input")
     exit(-1)
