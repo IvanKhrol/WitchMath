@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 from sympy import *
 from methods import *
 
-numOfIter = 50000
+numOfIter = 30000
 beg_t, end_t = 0, 16
 step = (end_t - beg_t)/numOfIter
 
@@ -29,7 +29,8 @@ else:
     print("Wrong input")
     exit(-1)
 
-plt.plot([item[0] for item in points], [-item[1] for item in points])
+plt.plot([item[0] for item in points], [item[1] for item in points])
 plt.xlabel('x')
 plt.ylabel('y')
+plt.grid()
 plt.show()
