@@ -12,6 +12,18 @@ def Runge_Kutta4 (Func, initialT, initialCondition, numOfIterations, h):
         
     return solution
 
+def Runge_Kutta2 (Func, initialT, initialCondition, numOfIterations, h):
+    solution = [initialCondition]
+    t = initialT
+    
+    for i in range(numOfIterations):
+        k1 = Func(t, solution[-1])
+        k2 = Func(t + h , solution[-1] + h * k1)
+        t += h
+        solution.append(solution[-1] + h / 2 * (k1 + k2))
+        
+    return solution
+
 def Addams4 (Func, initialT, initialСondition, numOfIterations, h):
     solution = initialСondition
     t = initialT
