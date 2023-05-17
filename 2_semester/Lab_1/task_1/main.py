@@ -21,7 +21,7 @@ f =  Array([vx, vy, dvx, dvy, dT])
 func = lambdify((t, [x, y, vx, vy, T]), f, 'numpy')
 
 
-fl = input()
+fl = input("Выберете метод:\nR - Рунге-Кутта\nA - Адамс:\n")
 if fl == "R":
     points = Runge_Kutta4(func, beg_t, begin, numOfIter, step)
 elif fl == "A":

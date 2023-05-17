@@ -9,7 +9,7 @@ step = (end_t - beg_t)/numOfIter
 
 m = 0.01227747
 M = 1 - m
-f_0 = 0
+f_0 = 0.0
 
 begin = np.array([1.2, 0, 0, -1.05])
 # begin = np.array([0.994, 0, 0, -2.031732629557337])
